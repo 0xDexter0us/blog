@@ -1,4 +1,4 @@
-baseURL = ""
+baseURL = "https://dexter0us-blog.onrender.com/"
 languageCode = "en-us"
 title = "Dexter0us's Blog."
 baseurl = "/"
@@ -49,11 +49,11 @@ paginate = 5
 [languages]
   [languages.en]
     languageName = "English"
-    title = "Terminal"
-    subtitle = "A simple, retro theme for Hugo"
-    owner = ""
+    title = "Cybersecurity Blogs by Dexter0us"
+    subtitle = "Infosec, Bugbounty, Hacking, CTF and Open source tools."
+    owner = "Dexter0us"
     keywords = ""
-    copyright = ""
+    copyright = "Dexter0us"
     menuMore = "Show more"
     readMore = "Read more"
     readOtherPosts = "Read other posts"
