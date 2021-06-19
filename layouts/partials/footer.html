@@ -1,0 +1,15 @@
+<footer class="footer">
+  <div class="footer__inner">
+    <div class="copyright copyright--user">
+      <span>© {{ now.Year }} <a href="https://dexter0us.com">Dexter0us</a></span>
+    </div>
+  </div>
+</footer>
+
+<script src="{{ "assets/main.js" | absURL }}"></script>
+<script src="{{ "assets/prism.js" | absURL }}"></script>
+
+{{ if $.Site.Params.showLanguageSelector }}
+  <script src="{{ "assets/languageSelector.js" | absURL }}"></script>
+{{ end }}
+
