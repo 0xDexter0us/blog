@@ -1,5 +1,5 @@
 ---
-title: "CCC h1-ctf Write-up"
+title: "CCC H1-CTF WRITE-UP"
 date: 2021-06-19T12:24:35+05:30
 draft: false
 ---
