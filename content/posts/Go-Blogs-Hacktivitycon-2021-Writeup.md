@@ -5,7 +5,6 @@ author = ""
 authorTwitter = "" #do not include @
 cover = "https://miro.medium.com/max/788/0*wj44yAjifjt6VlCP.png"
 tags = ["ctf", "hacktivitycon", "hackerone", "golang", "ssti"]
-
 showFullContent = false
 
 +++
