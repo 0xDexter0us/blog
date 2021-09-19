@@ -19,7 +19,7 @@ I am [@dexter0us](https://twitter.com/0xDexter0us) and I'm a cyber secuirty enth
 
 
 
-I manage my retail business in my date time and love to hack and code in my free time. Currently preparing for my OSCP certification, improving my hacking skills and working on a few hacking tools which I'll release soon on my github page so keep an eye there :)
+I manage my retail business in my date time and love to hack and code in my free time. Currently managing [UPchieve VDP](https://hackerone.com/upchieve), preparing for my OSCP certification, improving my hacking skills and working on a few hacking tools which I'll release soon on my github page so keep an eye there :)
 
 
 

@@ -62,7 +62,7 @@ https://www.onsecurity.io/blog/go-ssti-method-research/
 https://blog.takemyhand.xyz/2020/05/ssti-breaking-gos-template-engine-to.html
 ```
 
-SSTI in Go isn't as simple as sending `{{8+8}}` and checking for `16` in the source code, as templates in golang is much different from other templating languages like Jijna2, Twig, in those languages for example we use `{{ pageTitle }}` but in golang we use `.` parameter  like this `{{ .pageTitle }}`
+SSTI in Go isn't as simple as sending `{{8+8}}` and checking for `16` in the source code, as templates in golang is much different from other templating languages like Jinja2, Twig, in those languages for example we use `{{ pageTitle }}` but in golang we use `.` parameter  like this `{{ .pageTitle }}`
 
 From this point my team mate [monke](https://twitter.com/pmofcats) joined me on this challenge.
 So we started testing the SSTI with `{{ . }}` payload, and we discovered that POST request to `/profile` endpoint is vulnerable here. Which outputs the data struct being passed as input to the template.
