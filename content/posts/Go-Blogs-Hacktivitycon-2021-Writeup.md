@@ -4,9 +4,8 @@ date = "2021-09-19T13:18:59+05:30"
 author = ""
 authorTwitter = "" #do not include @
 cover = "https://miro.medium.com/max/788/0*wj44yAjifjt6VlCP.png"
-tags = ["", ""]
-keywords = ["", ""]
-description = ""
+tags = ["ctf", "hacktivitycon", "hackerone", "golang", "ssti"]
+
 showFullContent = false
 
 +++
