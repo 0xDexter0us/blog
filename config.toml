@@ -49,7 +49,7 @@ paginate = 5
 [languages]
   [languages.en]
     languageName = "English"
-    title = "Cybersecurity Blogs by Dexter0us"
+    title = "Cybersecurity | Bug Bounty | CTF | Hacking Write-ups by dexter0us"
     subtitle = "Infosec, Bugbounty, Hacking, CTF and Open source tools."
     owner = "Dexter0us"
     keywords = ""
@@ -82,4 +82,4 @@ paginate = 5
       [[languages.en.menu.main]]
         identifier = "Discord"
         name = "Discord"
-        url = "https://discord.gg/pRZDxmxp"
+        url = "https://discord.gg/bugbounty"
