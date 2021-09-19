@@ -1,5 +1,5 @@
 +++
-title = "Redlike (Redis PrivEsc) Hacktivity 2021 Writeup [Alternate Approach]"
+title = "Redlike (Redis PrivEsc) Hacktivitycon 2021 Writeup [Alternate Approach]"
 date = "2021-09-19T20:59:21+05:30"
 author = ""
 authorTwitter = "" #do not include @
