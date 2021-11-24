@@ -14,16 +14,9 @@ author = "Dexter0us"
 
 
 
-I am [@dexter0us](https://twitter.com/0xDexter0us) and I'm a cyber secuirty enthusiast, passionate coder and the author of this blog. 
+I am [@dexter0us](https://twitter.com/0xDexter0us), an infosec enthusiast, passionate coder, and the author of this blog. 
 
-
-
-
-I manage my retail business in my date time and love to hack and code in my free time. Currently managing [UPchieve VDP](https://hackerone.com/upchieve), preparing for my OSCP certification, improving my hacking skills and working on a few hacking tools which I'll release soon on my github page so keep an eye there :)
-
-
-
----
+I manage my retail business in my date time and love to hack and code in my free time. Currently managing [UPchieve VDP](https://hackerone.com/upchieve), preparing for my OSCP certification, improving my hacking skills, and working on a few hacking tools which you can find on my [Github page.](https://github.com/0xDexter0us)
 
 
 
