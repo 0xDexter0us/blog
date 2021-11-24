@@ -47,6 +47,6 @@ JSON response keys are the most underrated asset for fuzzing. If an api endpoint
 
 
 
-which is secure but what if `/api/v2/<uuid>/Mobile` is not secure and can leak phone number of every user, many times JSON keys can be an unlinked parameter `isAdmin` and `debug` are such an example that everyone is aware of. I use this list for endpoint and parameter fuzzing that's it deserves to be a separate list.
+which is secure but what if `/api/v2/<uuid>/Mobile` is not secure and can leak phone number of every user, many times JSON keys can be an unlinked parameter `isAdmin` and `debug` are such an example that everyone is aware of. I use this list for endpoint and parameter fuzzing that's why it deserves to be a separate list.
 
 If you like this project then please star the project on GitHub.
